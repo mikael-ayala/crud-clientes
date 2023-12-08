@@ -30,15 +30,6 @@ public class Client {
         this.children = children;
     }
 
-    public Client(ClientDTO clientDTO) {
-        this.id = clientDTO.id();
-        this.name = clientDTO.name();
-        this.cpf = clientDTO.cpf();
-        this.income = clientDTO.income();
-        this.birthDate = clientDTO.birthDate();
-        this.children = clientDTO.children();
-    }
-
     public Long getId() {
         return id;
     }
