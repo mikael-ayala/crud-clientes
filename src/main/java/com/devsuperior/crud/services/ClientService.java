@@ -3,14 +3,13 @@ package com.devsuperior.crud.services;
 import com.devsuperior.crud.dto.ClientDTO;
 import com.devsuperior.crud.entities.Client;
 import com.devsuperior.crud.repositories.ClientRepository;
+import com.devsuperior.crud.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.List;
 
 @Service
 public class ClientService {
@@ -26,7 +25,8 @@ public class ClientService {
 
     @Transactional(readOnly = true)
     public ClientDTO findById(@PathVariable Long id) {
-        Client client = clientRepository.findById(id).orElseThrow();
+        Client client = clientRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("O cliente não foi encontrado"));
         return new ClientDTO(client);
     }
 
