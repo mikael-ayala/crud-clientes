@@ -29,4 +29,10 @@ public class ClientService {
         Client client = clientRepository.findById(id).orElseThrow();
         return new ClientDTO(client);
     }
+
+    @Transactional
+    public ClientDTO insert(ClientDTO clientDTO) {
+        Client client = clientRepository.save(new Client(clientDTO));
+        return new ClientDTO(client);
+    }
 }
